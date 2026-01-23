@@ -18,10 +18,22 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
-                <li>
+                 <br>
+                 <button class="CLASS CLASS-primary CLASS-block" data-toggle="collapse" data-target="#exam">Start Exam</button>
+                <br>         
+                 <li>
                     <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
                     <a class="btn btn-link" href="{% url 'onlinecourse:logout' %}">Logout</a>
                 </li>
+                  <div id="exam" class="collapse">
+                      <from id="questionform" action="{% url 'onlinecourse:submit' course.id %}" method="POST">
+                                   {% for question in course.question_set.all %}
+                       <div class="card mt-1">
+                           <div class="card-header">
+                               <h5>{{ question.content }}</h5>
+                           </div>
+                      </from>
+               </div>
                 {% else %}
                 <li>
                     <form class="form-inline" action="{% url 'onlinecourse:login' %}" method="post">
@@ -50,6 +62,7 @@
                     </div>
                 {% endfor %}
             </div>
+                     
             <!-- Course detail template changes go here -->
     </div>
 </body>
